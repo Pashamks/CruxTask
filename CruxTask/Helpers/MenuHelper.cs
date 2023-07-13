@@ -1,6 +1,8 @@
 ﻿
 using CruxTask.Enums;
 using CruxTask.Extentions;
+using CruxTask.Settings;
+using CruxTask.Validator;
 
 namespace CruxTask.Helpers
 {
@@ -28,21 +30,13 @@ namespace CruxTask.Helpers
 
                 isParsed = int.TryParse(Console.ReadLine(), out key);
 
-                ValidateInput(key, isParsed);
+                CommonValidator.ValidateInput(key, isParsed, menus);
 
-
-            }
-        }
-
-        private static void ValidateInput(int key, bool isParsed)
-        {
-            if (!isParsed)
-            {
-                Console.WriteLine("Sorry we can not parse your input. Try again.");
-            }
-            else if (!menus.ContainsKey(key))
-            {
-                Console.WriteLine("Sorry we do not have this option in menu.");
+                if(key == (int)MenuOptions.CountPasswword)
+                {
+                    var amount = PasswordParserHelper.CountValidPasswordFromFile(FileSettings.FilePath);
+                    Console.WriteLine($"Amount of valid passwords = {amount}");
+                }
             }
         }
     }

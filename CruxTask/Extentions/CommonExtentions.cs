@@ -1,4 +1,5 @@
 ﻿using CruxTask.Enums;
+using CruxTask.Models;
 
 namespace CruxTask.Extentions
 {
@@ -13,5 +14,9 @@ namespace CruxTask.Extentions
             }
             return result;
         }
+
+       
+        public static List<string> SplitDataToRows(this string data, string separator) =>
+            data.Split(separator).ToList();
     }
 }
